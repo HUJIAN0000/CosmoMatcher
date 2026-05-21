@@ -76,7 +76,7 @@ If you use **CosmoMatcher** in your research, please cite the following paper:
 @article{Hu2026CosmoMatcher,
   title={CosmoMatcher: A Global Optimization Pipeline for Multi-probe Cosmological Data Matching and Covariance Extraction},
   author={Hu, Jian and Liu, Yi and Hu, Jian-Ping and Li, Zhongmu},
-  journal={The Astrophysical Journal Supplement Series},
+  journal={XXXXXX},
   year={2026},
   note={Submitted}
 }

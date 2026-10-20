@@ -1,0 +1,13 @@
+{
+  "verified": true,
+  "matched_systems": 99,
+  "distinct_sn": 198,
+  "parent_sn": 1048,
+  "maximum_covariance_difference": {
+    "lens": 0.0,
+    "source": 0.0,
+    "cross": 0.0
+  },
+  "host_error_99_entries_kept": 23,
+  "note": "No special handling of host errors; same data for both inference cases."
+}

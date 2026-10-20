@@ -1,0 +1,27 @@
+{
+  "mode": "cluster",
+  "sn_type": "pantheon",
+  "algo": "milp",
+  "tol_type": "dd",
+  "file_paths": {
+    "tracer": "synthetic_tracers.csv",
+    "obj": "synthetic_clusters.csv",
+    "covariance": "synthetic_covariance.cov"
+  },
+  "col_cfg": {
+    "tracer_z_col": "z",
+    "z1_col": "z",
+    "tracer_id_col": "CID",
+    "magnitude_col": "m_b_corr",
+    "mu_col": "mu"
+  },
+  "params": {
+    "wm": 0.3,
+    "tol": 0.05,
+    "unique_by": "object",
+    "formulation": "compact",
+    "plots": true,
+    "require_covariance": true,
+    "output_dir": "../demo_results/cluster"
+  }
+}

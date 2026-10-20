@@ -1,0 +1,36 @@
+{
+  "mode": "sgls",
+  "sn_type": "jla",
+  "algo": "milp",
+  "tol_type": "dd",
+  "file_paths": {
+    "tracer": "synthetic_tracers.csv",
+    "obj": "synthetic_sgl.csv",
+    "cov_jla_v0": "synthetic_jla_v0.npy",
+    "cov_jla_va": "synthetic_jla_va.npy",
+    "cov_jla_vb": "synthetic_jla_vb.npy",
+    "cov_jla_v0a": "synthetic_jla_v0a.npy",
+    "cov_jla_v0b": "synthetic_jla_v0b.npy",
+    "cov_jla_vab": "synthetic_jla_vab.npy"
+  },
+  "col_cfg": {
+    "tracer_z_col": "z",
+    "z1_col": "zl",
+    "z2_col": "zs",
+    "tracer_id_col": "CID",
+    "magnitude_col": "mb"
+  },
+  "params": {
+    "wm": 0.3,
+    "tol": 0.05,
+    "unique_by": "object",
+    "formulation": "compact",
+    "plots": true,
+    "require_covariance": true,
+    "output_dir": "../demo_results/jla",
+    "alpha": 0.14,
+    "beta": 3.1,
+    "jla_stat_mode": "auto",
+    "absolute_magnitude": -19.3
+  }
+}

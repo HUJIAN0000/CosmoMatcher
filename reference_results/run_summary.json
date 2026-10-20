@@ -1,0 +1,188 @@
+{
+  "version": "1.4.3",
+  "mode": "sgls",
+  "sn_type": "pantheon",
+  "algorithm": "milp",
+  "criterion": "dd",
+  "tolerance": 0.05,
+  "omega_m": 0.3,
+  "input_target_rows": 161,
+  "valid_targets": 161,
+  "input_tracer_rows": 1701,
+  "valid_tracers": 1701,
+  "matched_targets": 112,
+  "yield_percent": 69.56521739130434,
+  "distinct_catalogue_rows": 224,
+  "distinct_physical_ids": 224,
+  "tracer_id_column": "CID",
+  "uniqueness": "object",
+  "enforce_tracer_order": true,
+  "candidate_triplets_or_pairs": 169998,
+  "variables": 11704,
+  "constraints": 1326,
+  "nonzeros": 23408,
+  "formulation": "compact",
+  "solver": {
+    "maximum_cardinality": 112,
+    "secondary_cost": 0.016627080471987212,
+    "stages": [
+      {
+        "name": "maximum_cardinality",
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "seconds": 0.09437719299967284,
+        "mip_gap": 0.0,
+        "dual_bound": -112.0,
+        "objective": -112.0
+      },
+      {
+        "name": "minimum_mismatch",
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "seconds": 0.1919349420022627,
+        "mip_gap": 0.0,
+        "dual_bound": 6.651121730766724,
+        "objective": 6.651121730766724
+      }
+    ],
+    "optimal": true,
+    "canonicalization": {
+      "rule": "catalogue_order",
+      "cost_tolerance": 1e-12,
+      "steps": 161,
+      "seconds": 22.06896070199946,
+      "second_stage_cost": 0.01662708047198721,
+      "cost_change": 3.469446951953614e-18
+    }
+  },
+  "mean_relative_comoving_error": 0.004087252796666506,
+  "max_relative_comoving_error": 0.045935542896166234,
+  "covariance_kind": "total",
+  "covariance_validation": {
+    "shape": [
+      1701,
+      1701
+    ],
+    "symmetric": true,
+    "psd_checked": true,
+    "minimum_eigenvalue_if_needed": null,
+    "asymmetry_max_abs": 3.0000000000038676e-08,
+    "asymmetry_relative_to_matrix_max": 7.671984801296533e-08,
+    "symmetry_rtol": 1e-06,
+    "roundoff_symmetrized_for_validation": true,
+    "roundoff_correction_applied": true
+  },
+  "target_covariance_validation": null,
+  "covariance_alignment": "original_catalogue_row_order",
+  "cross_probe_assumption": "not_assembled",
+  "observable_notes": [
+    "R_flat assumes spatial flatness, common SN absolute magnitude, exact redshifts, and first-order covariance propagation; target-transfer mismatch is not included as extra noise."
+  ],
+  "matrix_order": "all lens-role SN, then all source-role SN",
+  "timing_seconds": {
+    "load_validate": 0.6972196559981967,
+    "candidate_or_greedy": 0.026733643000625307,
+    "milp_solve": 22.38707012699888,
+    "export": 0.102336665000621,
+    "plots": 3.192872283001634,
+    "total": 26.474252443997102
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39"
+  },
+  "configuration": {
+    "file_paths": {
+      "tracer": "/workspace/scratch/000293aa91a0/upload/Pantheon+SH0ES.dat",
+      "obj": "/workspace/scratch/000293aa91a0/upload/161sgls.csv",
+      "covariance": "/workspace/scratch/000293aa91a0/upload/Pantheon+SH0ES_STAT+SYS.cov"
+    },
+    "col_cfg": {
+      "tracer_z_col": "zHD",
+      "z1_col": "zl",
+      "z2_col": "zs",
+      "tracer_id_col": "CID",
+      "magnitude_col": "m_b_corr",
+      "output_cols": [
+        "CID",
+        "IDSURVEY",
+        "zHD",
+        "zHDERR",
+        "zCMB",
+        "zCMBERR",
+        "zHEL",
+        "zHELERR",
+        "m_b_corr",
+        "m_b_corr_err_DIAG",
+        "MU_SH0ES",
+        "MU_SH0ES_ERR_DIAG",
+        "CEPH_DIST",
+        "IS_CALIBRATOR",
+        "USED_IN_SH0ES_HF",
+        "c",
+        "cERR",
+        "x1",
+        "x1ERR",
+        "mB",
+        "mBERR",
+        "x0",
+        "x0ERR",
+        "COV_x1_c",
+        "COV_x1_x0",
+        "COV_c_x0",
+        "RA",
+        "DEC",
+        "HOST_RA",
+        "HOST_DEC",
+        "HOST_ANGSEP",
+        "VPEC",
+        "VPECERR",
+        "MWEBV",
+        "HOST_LOGMASS",
+        "HOST_LOGMASS_ERR",
+        "PKMJD",
+        "PKMJDERR",
+        "NDOF",
+        "FITCHI2",
+        "FITPROB",
+        "m_b_corr_err_RAW",
+        "m_b_corr_err_VPEC",
+        "biasCor_m_b",
+        "biasCorErr_m_b",
+        "biasCor_m_b_COVSCALE",
+        "biasCor_m_b_COVADD"
+      ]
+    },
+    "params": {
+      "wm": 0.3,
+      "tol": 0.05,
+      "formulation": "compact",
+      "unique_by": "auto",
+      "plots": true,
+      "require_covariance": true,
+      "invalid_rows": "error",
+      "jla_stat_mode": "auto",
+      "output_dir": "/workspace/scratch/000293aa91a0/tmp/release143_real",
+      "alpha": 0.14,
+      "beta": 3.1
+    }
+  },
+  "inputs": {
+    "tracer": {
+      "path": "/workspace/scratch/000293aa91a0/upload/Pantheon+SH0ES.dat",
+      "sha256": "1cb0fc379ef066afdc2ffd1857681cc478024570d8a3eba284fb645775198cf8"
+    },
+    "obj": {
+      "path": "/workspace/scratch/000293aa91a0/upload/161sgls.csv",
+      "sha256": "7b3ea68034ccbdca6b381fc043f495c3312e4f9479b30609ace5916d80cdabdc"
+    },
+    "covariance": {
+      "path": "/workspace/scratch/000293aa91a0/upload/Pantheon+SH0ES_STAT+SYS.cov",
+      "sha256": "abf806d966485e64afdb359c87bffc0ecc00d05eff0a31ced66f247385df0fdc"
+    }
+  },
+  "process_lifetime_peak_rss_MiB": 459.06640625
+}

@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "Please cite this software and the original data papers."
+title: "CosmoMatcher: constrained cosmological tracer assignment with covariance preservation"
+type: software
+version: 1.4.3
+date-released: 2026-10-20
+repository-code: "https://github.com/HUJIAN0000/CosmoMatcher"
+authors:
+  - family-names: "Hu"
+    given-names: "Jian"
+  - family-names: "Liu"
+    given-names: "Yi"
+  - family-names: "Wang"
+    given-names: "Chen"
+  - family-names: "Hu"
+    given-names: "Jian-Ping"
+  - family-names: "Zhao"
+    given-names: "Jia"
+  - family-names: "Zhu"
+    given-names: "Liangqing"
+abstract: "Two-stage constrained cosmological tracer assignment with physical-object uniqueness and covariance preservation."

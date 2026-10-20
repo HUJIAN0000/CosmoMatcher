@@ -1,0 +1,13 @@
+{
+  "max_standardized_discrepancy": {
+    "bias": 2.1929713515341365,
+    "coverage68_log": 1.1053899464239325,
+    "coverage95_log": 0.9576859232943008,
+    "coverage68_delta": 1.054656178205957,
+    "coverage95_delta": 1.8569330988782913
+  },
+  "failures": [],
+  "baseline_rows": 7,
+  "stress_rows": 63,
+  "heavy_tail_mc_rmse_warning": "3% linear GLS; use analytic RMSE alongside empirical estimate"
+}

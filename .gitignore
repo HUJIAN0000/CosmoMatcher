@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+Thumbs.db
+.venv/
+build/
+dist/
+*.spec
+rerun_results/
+demo_results/
+benchmarks/baseline_rerun/
+benchmarks/stress_rerun/
+benchmarks/observed_rerun/
+benchmarks/figures_rerun/
+applications/cddr143_application/matching_rerun/

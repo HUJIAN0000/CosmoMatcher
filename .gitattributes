@@ -1,0 +1,3 @@
+# Preserve bytes used by PACKAGE_SHA256.json, including frozen original scripts.
+# Update the manifest deliberately after any content or line-ending change.
+* -text

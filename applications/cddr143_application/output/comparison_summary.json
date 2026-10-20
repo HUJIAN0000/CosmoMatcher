@@ -1,0 +1,188 @@
+{
+  "protocol": "cddv301.py original main block",
+  "cases": {
+    "with_systematics": {
+      "case": "with_systematics",
+      "parameters": {
+        "alpha": [
+          0.1346127262258067,
+          0.2217836081955819,
+          0.3103344127432488,
+          0.40401489239031496,
+          0.5035965430024801
+        ],
+        "beta": [
+          3.3128692367787136,
+          4.030126323612263,
+          4.726815186290354,
+          5.410400473501143,
+          5.866540695255268
+        ],
+        "f_e": [
+          0.9872133807580621,
+          1.0031910764913077,
+          1.0244108161230137,
+          1.0482389009347246,
+          1.0684943055813187
+        ],
+        "eta0": [
+          -0.3033305388438661,
+          -0.17704197425235813,
+          0.030742727157406082,
+          0.28599965969422253,
+          0.4621888263149145
+        ],
+        "gamma": [
+          0.015447190423405836,
+          0.029349028419659192,
+          0.05687502127127381,
+          0.10212262782159383,
+          0.17650355958725047
+        ],
+        "m_step": [
+          9.65958290844882,
+          9.868200063225727,
+          10.060292534649843,
+          10.240707716126826,
+          10.453692905770712
+        ],
+        "tau": [
+          0.05511730102374154,
+          0.07737917327270391,
+          0.12753275528355534,
+          0.177514581492624,
+          0.19613469023619476
+        ]
+      },
+      "percentile_order": [
+        2.5,
+        16,
+        50,
+        84,
+        97.5
+      ],
+      "walkers": 140,
+      "steps": 1000,
+      "workers": 8,
+      "burn": 140,
+      "thin": 27,
+      "flat_sample_count": 4340,
+      "autocorrelation_times": [
+        55.08432222288722,
+        60.037238526004785,
+        60.14893734805822,
+        60.08045130003966,
+        61.71607116539362,
+        61.376005705672554,
+        70.34613814722975
+      ],
+      "passes_original_50tau_length_check": false,
+      "mean_acceptance": 0.39429285714285717,
+      "minimum_chi2_optimizer": 116.663,
+      "mass_step_sample_range": [
+        8.282130217067655,
+        10.808108927638424
+      ],
+      "seed": "Original initial-position generator seed=42; wrapper fixes numpy/emcee seed=20261019 in both cases."
+    },
+    "without_systematics": {
+      "case": "without_systematics",
+      "parameters": {
+        "alpha": [
+          0.1450202280163881,
+          0.22524471031229115,
+          0.3119525963140673,
+          0.4057305092454266,
+          0.5040171907658765
+        ],
+        "beta": [
+          3.397416265681891,
+          4.058310449405352,
+          4.7810930671474505,
+          5.474899046230467,
+          5.907026850007796
+        ],
+        "f_e": [
+          0.9884487940058744,
+          1.003701271293526,
+          1.0259386332923177,
+          1.0489812643554797,
+          1.069577261457276
+        ],
+        "eta0": [
+          -0.30782149123642794,
+          -0.17677619542030046,
+          0.014907283263354706,
+          0.2936537130212764,
+          0.4542446506089009
+        ],
+        "gamma": [
+          0.014469094812746513,
+          0.028546496153606646,
+          0.055792692833529715,
+          0.10264055771431563,
+          0.17967521457648233
+        ],
+        "m_step": [
+          9.661348287292897,
+          9.864172083615863,
+          10.047441540165606,
+          10.224365806386375,
+          10.417738122720317
+        ],
+        "tau": [
+          0.05440672643124711,
+          0.0750837335333649,
+          0.1265312901054684,
+          0.176592041753102,
+          0.19633654941066248
+        ]
+      },
+      "percentile_order": [
+        2.5,
+        16,
+        50,
+        84,
+        97.5
+      ],
+      "walkers": 140,
+      "steps": 1000,
+      "workers": 8,
+      "burn": 139,
+      "thin": 27,
+      "flat_sample_count": 4340,
+      "autocorrelation_times": [
+        56.39083811349699,
+        56.973445679182596,
+        61.24219248330689,
+        59.930328599205566,
+        62.35084425596138,
+        55.68455367285266,
+        69.68533886812347
+      ],
+      "passes_original_50tau_length_check": false,
+      "mean_acceptance": 0.39285714285714285,
+      "minimum_chi2_optimizer": 116.775,
+      "mass_step_sample_range": [
+        9.284839928882565,
+        10.734694290759572
+      ],
+      "seed": "Original initial-position generator seed=42; wrapper fixes numpy/emcee seed=20261019 in both cases."
+    }
+  },
+  "only_model_difference": "_C_DELTA_MU=None in statistical-only case",
+  "host_error_99": "unchanged; no special handling",
+  "same_99_matched_systems": true,
+  "diagonal_limit_log_kernel_difference": 0.0,
+  "triangle_plotter": "cosmo_tools.plot_getdist_comparison",
+  "plotting_helper_sha256": "3744b658954bbb1fa54e3f77d6bc1eea0f3ef0a1eef93cce6a6a79e5d24c0100",
+  "triangle_cases": [
+    "with_systematics",
+    "without_systematics"
+  ],
+  "triangle_sample_sha256": {
+    "with_systematics": "72658df30d98f4007a0c717338dc49bd16e2cd43ad7539afdf8137de0d92acfd",
+    "without_systematics": "99f5786d585545831f0257f8e1e868cc331ac852d463e33353f3180626450a7b"
+  },
+  "figure_provenance": "Figure 7 overlays the two recorded cddv301 runs using cosmo_tools.py; the table and Figure 8 use the same recorded samples. The original author-provided single-case PDF remains an input reference."
+}

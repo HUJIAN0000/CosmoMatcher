@@ -1,0 +1,109 @@
+\subsection{Revisiting a published lens--supernova CDDR analysis}\label{sec:app_cddr143}
+\subsubsection{Historical motivation and sample selection}
+We revisit \citet{Zhou2021}, an earlier CDDR study co-authored by one of the present authors. That analysis paired the 1048-object original Pantheon sample \citep{Scolnic2018} with a 205-lens compilation taken from the arXiv version of \citet{Amante2020}. Its archived implementation used sequential greedy matching without the SS3 lens-quality selection adopted below, yielding 120 matched systems. \citet{Zhou2021} explicitly noted that only SN statistical errors were used because the selected covariance had not been extracted from the full Pantheon systematic-error matrix. This provides a concrete scientific motivation for CosmoMatcher: to replace sequential allocation with a globally constrained assignment and to carry the selected systematic covariance, including correlations between the two SN roles, into the CDDR calculation.
+
+The use of these older catalogues is therefore deliberate. The original Pantheon data provide a traceable connection to the published analysis and its previously omitted systematic covariance; a newer SN release would change that reference data set. This is a methodological revisit of an identified limitation in an existing scientific application, rather than an attempt to obtain the strongest current CDDR constraint. The 161-lens/Pantheon+ software benchmark in Section~\ref{sec:application} separately demonstrates the workflow on a different data release.
+
+For the present application, we use the final \emph{MNRAS} version of \citet{Amante2020}, whose parent catalogue contains 204 lenses, and adopt its 143-system fiduciary subsample SS3. The published selection is $0.5\leq D_{\rm obs}\leq1$, where $D_{\rm obs}=c^2\theta_E/(4\pi\sigma_0^2)$. It excludes the 32 systems with nominal $D_{\rm obs}>1$, outside the physical distance-ratio range under the adopted lens interpretation, and the 29 systems with $D_{\rm obs}<0.5$, for which \citet{Amante2020} found less reliable cosmological constraints. The latter are not classified as unphysical merely by this cut. This externally specified selection gives a better-motivated lens sample for the adopted model than using the unfiltered compilation; it is not selected according to agreement with the CDDR null. The lens redshifts, Einstein radii and velocity dispersions have been checked against their Table~A1.
+
+Using $\Omega_m=0.31$, the 5 percent relative-distance window, physical-ID uniqueness and catalogue-order canonicalization, both MILP stages terminate optimally. The result is 99 complete lens systems with 198 distinct SN identifiers. An independent matching run reproduces the assignments. The original FITRES identifiers, row order and the numerical fields used for the analysis agree with the converted catalogue. The lens-role, source-role and cross-role $99\times99$ systematic covariance blocks agree entry by entry with their parent-matrix extraction. Their joint selected SN matrix is $198\times198$.
+
+The change from 120 historical pairs to 99 current systems reflects the revised parent-catalogue version, the SS3 preselection and the current matching rules together; it is not a fixed-input comparison of greedy matching and MILP. MILP maximizes coverage for the declared 143-lens input and constraints. Consequently, the smaller matched sample does not indicate poorer allocation performance, and any change in the CDDR result cannot be attributed to the optimizer alone. The improvement is a documented lens selection and an auditable propagation of the previously omitted systematic covariance, subject to the inference limitations stated below.
+
+\subsubsection{Distance model and covariance propagation}
+
+For inference we follow the supplied modified \texttt{cddv301.py} program. The SN distance-modulus model is
+\begin{equation}
+ \mu=m_B+\alpha x_1-\beta c+\gamma S(M)-M_B,\qquad
+ S(M)=\left[1+\exp\left(\frac{M-m_{\rm step}}{\tau}\right)\right]^{-1},
+ \label{eq:cddr_host}
+\end{equation}
+where $M=\log_{10}(M_{\rm host}/M_\odot)$ and the common $M_B$ cancels in $R_L=10^{(\mu_L-\mu_S)/5}$. All supplied host-mass errors, including entries equal to 99, are retained and propagated by the program without a special-case transformation. For the singular isothermal sphere lens model,
+\begin{equation}
+ R_A=\frac{c^2\theta_E}{4\pi f_e^2\sigma_0^2},\qquad
+ \sigma_{R_A}=R_A\sqrt{4(\sigma_{\sigma_0}/\sigma_0)^2+0.05^2}.
+\end{equation}
+The fixed fractional radius uncertainty is that used by the supplied program. To retain the parameter label in its GetDist output, we write its CDDR convention as
+\begin{equation}
+ \eta_{\rm code}(z)\equiv\frac{D_A(z)(1+z)^2}{D_L(z)}=1+\eta_0z,\qquad
+ p_i=\frac{(1+z_{s,i})(1+\eta_0z_{l,i})}{(1+z_{l,i})(1+\eta_0z_{s,i})},\qquad
+ r_i=R_{A,i}-1+p_iR_{L,i}.
+ \label{eq:cddr_eta}
+\end{equation}
+This is the reciprocal distance-duality convention to equation~(10) of \citet{Zhou2021}, with the same null $\eta_0=0$. The two finite-redshift linear parameterizations are not interchangeable by changing a sign alone. Spatial flatness and transfer of the SN measurements to the target redshifts through matching are assumed.
+
+The C11 input is a systematic-only covariance. Let $C_{LL}^{\rm sys}$, $C_{SS}^{\rm sys}$ and $C_{LS}^{\rm sys}$ be its extracted blocks. The program constructs
+\begin{align}
+ C_\Delta&=\operatorname{diag}(\sigma_{m_B,L}^2+\sigma_{m_B,S}^2)
+ +C_{LL}^{\rm sys}+C_{SS}^{\rm sys}-C_{LS}^{\rm sys}-(C_{LS}^{\rm sys})^{\mathsf T},\\
+ V_i&=\alpha^2(\sigma_{x_1,L,i}^2+\sigma_{x_1,S,i}^2)
+ +\beta^2(\sigma_{c,L,i}^2+\sigma_{c,S,i}^2)\nonumber\\
+ &\quad+\gamma^2\left\{[S'(M_{L,i})\sigma_{M,L,i}]^2+[S'(M_{S,i})\sigma_{M,S,i}]^2\right\},\\
+ C_r&=\operatorname{diag}(\sigma_{R_A}^2)+W[C_\Delta+\operatorname{diag}(V)]W,
+ \qquad W_{ii}=p_iR_{L,i}\frac{\ln10}{5}.
+ \label{eq:cddr_cov}
+\end{align}
+Both cross-role terms are therefore retained with minus signs, while the $m_B$ statistical variance is added once. The $99\times99$ difference covariance is distinct from the $198\times198$ selected SN covariance. Cholesky factorization is used in the quadratic form.
+
+Equation~\ref{eq:cddr_cov} retains the statistical-error approximation of \texttt{cddv301.py}: the individual $m_B$, $x_1$ and $c$ variances are propagated, but their within-SN statistical cross-covariances are omitted. For each SN, propagation of the joint SALT2 measurement covariance would additionally contribute
+\begin{equation}
+ 2\alpha\operatorname{Cov}(m_B,x_1)
+ -2\beta\operatorname{Cov}(m_B,c)
+ -2\alpha\beta\operatorname{Cov}(x_1,c)
+ \label{eq:cddr_stat_omitted}
+\end{equation}
+to its distance-modulus variance. These contributions from the two SNe would add in the variance of their difference. They are distinct from the cross-role C11 systematic blocks retained above. Thus this application preserves and propagates the selected systematic covariance, but does not implement a complete SALT2 statistical-covariance treatment. The same approximation is used in both comparison runs.
+
+\subsubsection{Results with and without the systematic sub-matrices}
+The inference target is exactly the supplied program's weighting,
+\begin{equation}
+ \pi(\boldsymbol\theta\mid\mathrm{data})\propto
+ \mathbf{1}_{\rm prior}(\boldsymbol\theta)
+ \exp[-\tfrac12\boldsymbol r^{\mathsf T}C_r^{-1}\boldsymbol r],\qquad
+ \boldsymbol\theta=(\alpha,\beta,f_e,\eta_0,\gamma,m_{\rm step},\tau).
+ \label{eq:cddr_kernel}
+\end{equation}
+We retain its uniform priors, bounded Nelder--Mead initialization, 140 walkers, 1000 steps, default \texttt{emcee} move and eight worker processes. Burn-in and thinning follow the program's autocorrelation-time prescription. A recording wrapper fixes the Monte Carlo seed for reproducibility and saves the actual samples passed to GetDist; it does not change the model, initialization procedure or sampling move.
+
+The covariance depends on the fitted parameters, but Eq.~\ref{eq:cddr_kernel} retains only the supplied chi-square weighting and does not include a covariance-determinant factor. It is therefore not the normalized Gaussian likelihood for this parameter-dependent covariance. We use it here to demonstrate the matching-to-inference workflow under a specified analysis protocol, rather than to establish a new precision constraint on CDDR.
+
+The only comparison is omission of all C11 systematic blocks. For this case, $C_\Delta$ contains only the $m_B$ statistical diagonal, and the program's original diagonal-error branch retains the same stretch, colour, host-mass and lens uncertainties. The 99 assignments, input measurements and all priors remain identical. Numerically, setting the systematic blocks to zero in Eq.~\ref{eq:cddr_cov} reproduces that diagonal branch.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Parameter summaries from two recorded runs following the supplied \texttt{cddv301.py} settings. The systematic case includes $C_{LL}^{\rm sys}$, $C_{SS}^{\rm sys}$, $C_{LS}^{\rm sys}$ and its transpose; the other case omits them all. Both omit the within-SN statistical cross-covariances in Eq.~\ref{eq:cddr_stat_omitted}. Values are medians with marginal 16th/84th-percentile errors; the 1000-step chains do not meet the program's chain-length criterion. Figure~\ref{fig:cddr143} overlays the same two recorded sample sets.}\label{tab:cddr143}
+\begin{tabular}{llll}\toprule
+Parameter & Uniform-prior bounds & With systematics & Without systematics\\\midrule
+$\alpha$ & $(-0.2,0.7)$ & $0.310^{+0.094}_{-0.089}$ & $0.312^{+0.094}_{-0.087}$ \\
+$\beta$ & $(2,6)$ & $4.727^{+0.684}_{-0.697}$ & $4.781^{+0.694}_{-0.723}$ \\
+$f_e$ & $(0.5,1.5)$ & $1.024^{+0.024}_{-0.021}$ & $1.026^{+0.023}_{-0.022}$ \\
+$\eta_0$ & $(-0.5,0.5)$ & $0.031^{+0.255}_{-0.208}$ & $0.015^{+0.279}_{-0.192}$ \\
+$\gamma$ & $(0,0.3)$ & $0.057^{+0.045}_{-0.028}$ & $0.056^{+0.047}_{-0.027}$ \\
+$m_{\rm step}$ & $(5,15)$ & $10.060^{+0.180}_{-0.192}$ & $10.047^{+0.177}_{-0.183}$ \\
+$\tau$ & $(0.05,0.20)$ & $0.128^{+0.050}_{-0.050}$ & $0.127^{+0.050}_{-0.051}$ \\
+\bottomrule\end{tabular}
+\end{table}
+
+With the systematic covariance, the recorded run gives $\eta_0=0.031^{+0.255}_{-0.208}$; without it, $\eta_0=0.015^{+0.279}_{-0.192}$. Both 68 percent intervals include zero. The corresponding $m_{\rm step}$ medians are 10.060 and 10.047, respectively, with the sampled distributions concentrated near 10. Figure~\ref{fig:cddr143} overlays the seven-parameter distributions of the two runs; Table~\ref{tab:cddr143} and Fig.~\ref{fig:cddr143_comparison} summarize the same recorded samples.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{figures/cddr143_triangle.pdf}
+\caption{Overlaid GetDist triangle for the two 99-system lens--SN runs. Blue includes the C11 systematic sub-matrices and both cross-role covariance terms; orange omits all C11 systematic terms. The matching, priors, host-mass error treatment and \texttt{cddv301.py} sampling settings are identical. Both use the statistical approximation described after Eq.~\ref{eq:cddr_cov}. Shading encloses the nominal 68 and 95 percent regions of the recorded sample distributions; convergence has not been established for these 1000-step runs. The CDDR coefficient $\eta_0$ follows Eq.~\ref{eq:cddr_eta}.}\label{fig:cddr143}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{figures/cddr143_covariance_comparison.pdf}
+\caption{Comparison of the CDDR coefficient and host-mass transition parameter in the two recorded \texttt{cddv301.py} runs. Blue includes all C11 systematic sub-matrices and cross-role terms; orange omits them. The statistical approximation, matching, priors, host-mass error treatment and sampling settings are identical. The curves summarize the recorded 1000-step samples, subject to the limitations stated in the text. The dashed line denotes the CDDR null.}\label{fig:cddr143_comparison}
+\end{figure}
+
+Under the specified priors, weighting and statistical-error approximation, the recorded distributions are compatible with the CDDR null. Their differences are small compared with their marginal intervals. This fixed-workflow comparison demonstrates the use of selected systematic covariance in a downstream calculation; it does not establish that systematic covariance is negligible for other samples or after completing the statistical-error model.
+
+Both runs fail the program's chain-length criterion of 50 times the largest estimated integrated autocorrelation time. Burn-in removal and thinning do not establish convergence, and the intervals reported here summarize the recorded 1000-step runs rather than a convergence-validated measurement. A quantitative CDDR reanalysis requires longer chains with renewed diagnostics, validation of the joint SALT2 statistical-covariance propagation, and assessment of the parameter-dependent likelihood normalization. Agreement with the CDDR null does not validate these approximations or establish the matching software's statistical accuracy.
+
+
+
+In addition to this application, five companion analyses connect the matching and covariance workflow to concrete likelihoods: cluster distance comparisons, the lens distance-sum rule, gas-fraction measurements, compact radio sources and stellar-dynamical lenses. The numerical constraints below are reported by those studies. Their historical greedy or MILP selections are not assumed to equal the v\version\ canonical sample.
+
+The curvature, hydrostatic-mass-bias and compact-radio-source studies are unpublished companion analyses. Their reported results illustrate downstream uses and have not been independently reproduced in this software benchmark. In all five applications, selection uses a fiducial distance relation even when the subsequent likelihood is formulated without an explicit dark-energy model.

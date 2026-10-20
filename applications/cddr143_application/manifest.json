@@ -1,0 +1,41 @@
+{
+  "cddv301.py": {
+    "source": "E:\\ai\\project\\paperproject\\raa01\\oldwork\\data011\\newtest\\cddv301.py",
+    "sha256": "c39178694d817745f7a0fa4fbc4549c98d6d716fe08d7cc010794f97dd17a665"
+  },
+  "result_final_min_select_handle": {
+    "source": "E:\\ai\\project\\paperproject\\raa01\\oldwork\\data011\\newtest\\result_final_min_select_handle",
+    "sha256": "d5cbbceb7c2efb26291dd06c4d985971c4d1ab43400898111b9989eaebe5eed4"
+  },
+  "cov_sgls_milp_dd_pantheon.npz": {
+    "source": "E:\\ai\\project\\paperproject\\raa01\\oldwork\\data011\\newtest\\cov_sgls_milp_dd_pantheon.npz",
+    "sha256": "f41de157e4ee0b05bad72cbd725826e5a12d2b776e3769474c738cf6d0fd0858"
+  },
+  "CosmoMatcherv1.43.py": {
+    "source": "E:\\ai\\project\\paperproject\\raa01\\oldwork\\data011\\newtest\\CosmoMatcherv1.43.py",
+    "sha256": "9f7f3d233f8b7f17571c1ec7e2389e51407a4d5e60728952bb84bb756d41c956"
+  },
+  "Ancillary_C11_jla.csv": {
+    "source": "E:\\ai\\project\\paperproject\\raa01\\oldwork\\data011\\newtest\\Ancillary_C11_jla.csv",
+    "sha256": "2dc166f47de3b6bd3c541405eff7f9179f2023b1d86373925a896578149e45e0"
+  },
+  "Ancillary_C11.FITRES": {
+    "source": "E:\\ai\\project\\paperproject\\raa01\\oldwork\\data011\\newtest\\Ancillary_C11.FITRES",
+    "sha256": "53a282acfd9b004c1a5df7fea87d7933c7ddd27b8d35e04f0fef0ba167b099b6"
+  },
+  "sys_full_long_C11.txt": {
+    "source": "E:\\ai\\project\\paperproject\\raa01\\oldwork\\data011\\newtest\\sys_full_long_C11.txt",
+    "sha256": "8d3c06e852f2107d90fde5ff03d4f39db4c615c2447808e3873f12d895d5dee7"
+  },
+  "sgls_143_fiduciary_ss3.csv": {
+    "source": "E:\\ai\\project\\paperproject\\raa01\\oldwork\\data011\\newtest\\sgls_143_fiduciary_ss3.csv",
+    "sha256": "e52846181ed619c76532d79396f9556908ced27748caecb36f7badc93c3bbce6"
+  },
+  "author_cddv301_getdist.pdf": {
+    "source": "E:\\ai\\project\\paperproject\\raa01\\oldwork\\data011\\newtest\\cddv301_getdist.pdf",
+    "sha256": "08c1ca371465adcffc2933e7082f745125b5857ddf3b0d36e182e04c23caf878"
+  },
+  "comparison_change": "Only _C_DELTA_MU=None before _DATA is bundled; lnlike uses original diagonal branch.",
+  "sampling": "Author Nelder-Mead initialization, 140 walkers, 1000 steps, default emcee move, 8 processes, original burn/thin selection.",
+  "host_errors": "Unchanged, including error=99; no filtering or special-case transformation."
+}

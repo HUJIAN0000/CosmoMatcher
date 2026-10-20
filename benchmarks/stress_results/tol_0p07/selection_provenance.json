@@ -1,0 +1,139 @@
+{
+  "fingerprint": {
+    "inputs": {
+      "sn_file": "1cb0fc379ef066afdc2ffd1857681cc478024570d8a3eba284fb645775198cf8",
+      "lens_file": "7b3ea68034ccbdca6b381fc043f495c3312e4f9479b30609ace5916d80cdabdc",
+      "covariance_file": "abf806d966485e64afdb359c87bffc0ecc00d05eff0a31ced66f247385df0fdc"
+    },
+    "omega_m": 0.3,
+    "tolerance": 0.07,
+    "columns": {
+      "sn_z": "zHD",
+      "sn_id": "CID",
+      "lens_z": "zl",
+      "source_z": "zs",
+      "lens_name": "Lens name"
+    },
+    "backend_sha256": "9f7f3d233f8b7f17571c1ec7e2389e51407a4d5e60728952bb84bb756d41c956"
+  },
+  "source": "two-stage MILP plus catalogue-order rule",
+  "backend_version": "1.4.3",
+  "matching_summary": {
+    "version": "1.4.3",
+    "mode": "sgls",
+    "sn_type": "pantheon",
+    "algorithm": "milp",
+    "criterion": "dd",
+    "tolerance": 0.07,
+    "omega_m": 0.3,
+    "input_target_rows": 161,
+    "valid_targets": 161,
+    "input_tracer_rows": 1701,
+    "valid_tracers": 1701,
+    "matched_targets": 114,
+    "yield_percent": 70.80745341614907,
+    "distinct_catalogue_rows": 228,
+    "distinct_physical_ids": 228,
+    "tracer_id_column": "CID",
+    "uniqueness": "object",
+    "enforce_tracer_order": true,
+    "candidate_triplets_or_pairs": 337751,
+    "variables": 16286,
+    "constraints": 1342,
+    "nonzeros": 32572,
+    "formulation": "compact",
+    "solver": {
+      "maximum_cardinality": 114,
+      "secondary_cost": 0.032087551110313736,
+      "stages": [
+        {
+          "name": "maximum_cardinality",
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "seconds": 0.10334644899921841,
+          "mip_gap": 0.0,
+          "dual_bound": -114.0,
+          "objective": -114.0
+        },
+        {
+          "name": "minimum_mismatch",
+          "status": 0,
+          "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+          "seconds": 0.17420364300051006,
+          "mip_gap": 0.0,
+          "dual_bound": 6.549170268441582,
+          "objective": 6.549170268441582
+        }
+      ],
+      "optimal": true,
+      "canonicalization": {
+        "rule": "catalogue_order",
+        "cost_tolerance": 1e-12,
+        "steps": 161,
+        "seconds": 30.832586731001356,
+        "second_stage_cost": 0.03208755111031373,
+        "cost_change": 6.938893903907228e-18
+      }
+    },
+    "mean_relative_comoving_error": 0.005057715023423584,
+    "max_relative_comoving_error": 0.06842295246137035,
+    "covariance_kind": "not_supplied",
+    "covariance_validation": null,
+    "target_covariance_validation": null,
+    "covariance_alignment": "original_catalogue_row_order",
+    "cross_probe_assumption": "not_assembled",
+    "observable_notes": [],
+    "matrix_order": "all lens-role SN, then all source-role SN",
+    "timing_seconds": {
+      "load_validate": 0.20512372499797493,
+      "candidate_or_greedy": 0.016743509000662016,
+      "milp_solve": 31.112192208001943,
+      "export": 0.023639136001293082,
+      "plots": 7.710004865657538e-07,
+      "total": 31.39262849899751
+    },
+    "environment": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "scipy": "1.17.0",
+      "platform": "Linux-6.18.44-x86_64-with-glibc2.39"
+    },
+    "configuration": {
+      "file_paths": {
+        "tracer": "/workspace/scratch/000293aa91a0/output/CosmoMatcher_MC_Benchmark/data/Pantheon+SH0ES.dat",
+        "obj": "/workspace/scratch/000293aa91a0/output/CosmoMatcher_MC_Benchmark/data/161sgls.csv"
+      },
+      "col_cfg": {
+        "tracer_z_col": "zHD",
+        "tracer_id_col": "CID",
+        "z1_col": "zl",
+        "z2_col": "zs"
+      },
+      "params": {
+        "wm": 0.3,
+        "tol": 0.07,
+        "unique_by": "auto",
+        "formulation": "compact",
+        "plots": false,
+        "require_covariance": false,
+        "tie_break": "catalogue_order",
+        "tie_cost_tolerance": 1e-12,
+        "invalid_rows": "error",
+        "output_dir": "/workspace/scratch/000293aa91a0/output/CosmoMatcher_MC_Benchmark/stress_results/tol_0p07/matching"
+      }
+    },
+    "inputs": {
+      "tracer": {
+        "path": "/workspace/scratch/000293aa91a0/output/CosmoMatcher_MC_Benchmark/data/Pantheon+SH0ES.dat",
+        "sha256": "1cb0fc379ef066afdc2ffd1857681cc478024570d8a3eba284fb645775198cf8"
+      },
+      "obj": {
+        "path": "/workspace/scratch/000293aa91a0/output/CosmoMatcher_MC_Benchmark/data/161sgls.csv",
+        "sha256": "7b3ea68034ccbdca6b381fc043f495c3312e4f9479b30609ace5916d80cdabdc"
+      }
+    },
+    "process_lifetime_peak_rss_MiB": 246.94921875
+  },
+  "backend_sha256": "9f7f3d233f8b7f17571c1ec7e2389e51407a4d5e60728952bb84bb756d41c956"
+}

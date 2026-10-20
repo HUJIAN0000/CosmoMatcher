@@ -1,0 +1,98 @@
+{
+  "inputs": {
+    "sn_file": {
+      "sha256": "1cb0fc379ef066afdc2ffd1857681cc478024570d8a3eba284fb645775198cf8"
+    },
+    "covariance_file": {
+      "sha256": "abf806d966485e64afdb359c87bffc0ecc00d05eff0a31ced66f247385df0fdc"
+    },
+    "lens_file": {
+      "sha256": "7b3ea68034ccbdca6b381fc043f495c3312e4f9479b30609ace5916d80cdabdc"
+    }
+  },
+  "selection_sha256": "769828ae8ca5683f7cc65a67872633ec09f820a987653fddec27d60eb0c1c9ff",
+  "benchmark_sha256": "7bc633c38e4ddddc4214633dbb033d3a379a8c881a0b483524895dfe4551575a",
+  "script_sha256": "6a8cc07e11329570e49f3b6e6496ee56562d63df2e19a8e578080169950c19b6",
+  "configuration": {
+    "sn_file": "/workspace/scratch/000293aa91a0/output/CosmoMatcher_MC_Benchmark/data/Pantheon+SH0ES.dat",
+    "covariance_file": "/workspace/scratch/000293aa91a0/output/CosmoMatcher_MC_Benchmark/data/Pantheon+SH0ES_STAT+SYS.cov",
+    "lens_file": "/workspace/scratch/000293aa91a0/output/CosmoMatcher_MC_Benchmark/data/161sgls.csv",
+    "tolerance": 0.05,
+    "matching_omega_m": 0.3,
+    "methods": [
+      "single",
+      "gls_constant",
+      "gls_linear"
+    ],
+    "columns": {
+      "sn_z": "zHD",
+      "sn_id": "CID",
+      "lens_z": "zl",
+      "source_z": "zs",
+      "lens_name": "Lens name"
+    }
+  },
+  "covariance_validation": {
+    "format": "flat_dimension_header",
+    "n": 1701,
+    "max_asymmetry_before_symmetrizing": 3.0000000000038676e-08,
+    "minimum_eigenvalue": 0.0008027816532256272,
+    "roundoff_symmetrized": true,
+    "psd_tolerance": 3.910331e-13
+  },
+  "availability": [
+    {
+      "method": "single",
+      "n_available": 112,
+      "anchor_covariance_rank": 224,
+      "ratio_covariance_rank": 112
+    },
+    {
+      "method": "gls_constant",
+      "n_available": 143,
+      "anchor_covariance_rank": 211,
+      "ratio_covariance_rank": 143
+    },
+    {
+      "method": "gls_linear",
+      "n_available": 128,
+      "anchor_covariance_rank": 222,
+      "ratio_covariance_rank": 128
+    }
+  ],
+  "cohort_comparisons": [
+    {
+      "cohort": "single_vs_gls_constant",
+      "method": "gls_constant",
+      "n_targets": 112,
+      "median_abs_R_difference": 0.01907303308880609,
+      "max_abs_R_difference": 0.14487083952009244,
+      "median_sigma_ratio_gls_to_single": 0.17600470465735304
+    },
+    {
+      "cohort": "single_vs_gls_linear",
+      "method": "gls_linear",
+      "n_targets": 111,
+      "median_abs_R_difference": 0.019867455065757156,
+      "max_abs_R_difference": 0.14765815931728998,
+      "median_sigma_ratio_gls_to_single": 0.19110129362296713
+    },
+    {
+      "cohort": "common_all",
+      "method": "gls_constant",
+      "n_targets": 111,
+      "median_abs_R_difference": 0.018497011769649463,
+      "max_abs_R_difference": 0.14487083952009244,
+      "median_sigma_ratio_gls_to_single": 0.17594261113701612
+    },
+    {
+      "cohort": "common_all",
+      "method": "gls_linear",
+      "n_targets": 111,
+      "median_abs_R_difference": 0.019867455065757156,
+      "max_abs_R_difference": 0.14765815931728998,
+      "median_sigma_ratio_gls_to_single": 0.19110129362296713
+    }
+  ],
+  "scope": "Observed magnitudes, exact supplied redshifts, fixed selection; descriptive estimator differences, not truth-based bias or interval coverage."
+}

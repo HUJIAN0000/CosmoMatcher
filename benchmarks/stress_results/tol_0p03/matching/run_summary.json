@@ -1,0 +1,117 @@
+{
+  "version": "1.4.3",
+  "mode": "sgls",
+  "sn_type": "pantheon",
+  "algorithm": "milp",
+  "criterion": "dd",
+  "tolerance": 0.03,
+  "omega_m": 0.3,
+  "input_target_rows": 161,
+  "valid_targets": 161,
+  "input_tracer_rows": 1701,
+  "valid_tracers": 1701,
+  "matched_targets": 108,
+  "yield_percent": 67.0807453416149,
+  "distinct_catalogue_rows": 216,
+  "distinct_physical_ids": 216,
+  "tracer_id_column": "CID",
+  "uniqueness": "object",
+  "enforce_tracer_order": true,
+  "candidate_triplets_or_pairs": 59578,
+  "variables": 6986,
+  "constraints": 1302,
+  "nonzeros": 13972,
+  "formulation": "compact",
+  "solver": {
+    "maximum_cardinality": 108,
+    "secondary_cost": 0.0043611041592929185,
+    "stages": [
+      {
+        "name": "maximum_cardinality",
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "seconds": 0.057749000003241235,
+        "mip_gap": 0.0,
+        "dual_bound": -108.0,
+        "objective": -108.0
+      },
+      {
+        "name": "minimum_mismatch",
+        "status": 0,
+        "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+        "seconds": 0.08393310799874598,
+        "mip_gap": 0.0,
+        "dual_bound": 4.846419102295917,
+        "objective": 4.846419102295917
+      }
+    ],
+    "optimal": true,
+    "canonicalization": {
+      "rule": "catalogue_order",
+      "cost_tolerance": 1e-12,
+      "steps": 161,
+      "seconds": 10.826326235001034,
+      "second_stage_cost": 0.004361104159292919,
+      "cost_change": -8.673617379884035e-19
+    }
+  },
+  "mean_relative_comoving_error": 0.002680707622469502,
+  "max_relative_comoving_error": 0.021307904947736468,
+  "covariance_kind": "not_supplied",
+  "covariance_validation": null,
+  "target_covariance_validation": null,
+  "covariance_alignment": "original_catalogue_row_order",
+  "cross_probe_assumption": "not_assembled",
+  "observable_notes": [],
+  "matrix_order": "all lens-role SN, then all source-role SN",
+  "timing_seconds": {
+    "load_validate": 0.25882746699790005,
+    "candidate_or_greedy": 0.02641942199988989,
+    "milp_solve": 10.970611073000327,
+    "export": 0.014014338001288706,
+    "plots": 1.2119999155402184e-06,
+    "total": 11.304461912997795
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39"
+  },
+  "configuration": {
+    "file_paths": {
+      "tracer": "/workspace/scratch/000293aa91a0/output/CosmoMatcher_MC_Benchmark/data/Pantheon+SH0ES.dat",
+      "obj": "/workspace/scratch/000293aa91a0/output/CosmoMatcher_MC_Benchmark/data/161sgls.csv"
+    },
+    "col_cfg": {
+      "tracer_z_col": "zHD",
+      "tracer_id_col": "CID",
+      "z1_col": "zl",
+      "z2_col": "zs"
+    },
+    "params": {
+      "wm": 0.3,
+      "tol": 0.03,
+      "unique_by": "auto",
+      "formulation": "compact",
+      "plots": false,
+      "require_covariance": false,
+      "tie_break": "catalogue_order",
+      "tie_cost_tolerance": 1e-12,
+      "invalid_rows": "error",
+      "output_dir": "/workspace/scratch/000293aa91a0/output/CosmoMatcher_MC_Benchmark/stress_results/tol_0p03/matching"
+    }
+  },
+  "inputs": {
+    "tracer": {
+      "path": "/workspace/scratch/000293aa91a0/output/CosmoMatcher_MC_Benchmark/data/Pantheon+SH0ES.dat",
+      "sha256": "1cb0fc379ef066afdc2ffd1857681cc478024570d8a3eba284fb645775198cf8"
+    },
+    "obj": {
+      "path": "/workspace/scratch/000293aa91a0/output/CosmoMatcher_MC_Benchmark/data/161sgls.csv",
+      "sha256": "7b3ea68034ccbdca6b381fc043f495c3312e4f9479b30609ace5916d80cdabdc"
+    }
+  },
+  "process_lifetime_peak_rss_MiB": 176.47265625
+}

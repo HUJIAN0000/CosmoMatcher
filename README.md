@@ -1,134 +1,100 @@
-# CosmoMatcher v1.1
+# CosmoMatcher v1.4.3
 
-**A Global Optimization Pipeline for Multi-probe Cosmological Data Matching and Covariance Extraction**
+Constrained cosmological tracer assignment with covariance preservation.
 
-[![Python 3.10](https://img.shields.io/badge/python-3.10.19-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![OS: Windows](https://img.shields.io/badge/OS-Windows-green.svg)](https://www.microsoft.com/windows)
-[![Latest: v1.1](https://img.shields.io/badge/release-v1.1-brightgreen.svg)](https://github.com/HUJIAN0000/CosmoMatcher/releases)
+This release accompanies the manuscript **CosmoMatcher: constrained cosmological tracer assignment with covariance preservation** by Jian Hu, Yi Liu, Chen Wang, Jian-Ping Hu, Jia Zhao and Liangqing Zhu. The manuscript is prepared for RAA; this repository does not assert journal acceptance or an assigned paper DOI.
 
-**CosmoMatcher** is a professional, GUI-based scientific software designed to resolve the redshift-mismatch bottleneck in model-independent cosmology. It leverages Mixed-Integer Linear Programming (MILP) to identify the globally optimal matching between disparate cosmological probes (e.g., Strong Gravitational Lenses, Type Ia Supernovae, and Galaxy Clusters), and automatically extracts the corresponding full systematic covariance sub-matrices.
+## What it does
 
----
+For a design requiring one non-reused physical SN per target anchor, two MILP stages first maximize complete target coverage and then minimize squared distance mismatch. Physical-ID resource constraints apply across both lens/source roles. A catalogue-order rule resolves equal-cost assignments within a declared numerical tolerance. Retained parent indices support auditable covariance extraction.
 
-## 🌟 Key Features
+Allocation optimality is conditional on the declared catalogue, constraints and successful optimization. It does not guarantee optimal cosmological precision. The distance window uses a fiducial flat LCDM background and is not itself cosmology-independent. Covariance sub-matrix indexing is standard; the software provides ordering, identity and propagation safeguards.
 
-* **Global Optimization (MILP):** Guarantees the theoretical maximum data yield, overcoming the localized "greedy traps" of traditional algorithms.
-* **Ablation Study Engine ($2 \times 2$):** Supports seamless switching between two algorithms (**MILP** vs. **Greedy**) and two tolerance criteria (**Comoving Distance $\Delta d/d$** vs. **Static Redshift $\Delta z$**).
-* **Automated Covariance Extraction:** Automatically extracts full non-diagonal systematic covariance matrices and cross-covariance terms for matched subsamples.
-* **Publication-grade Diagnostics (new in v1.1):** Automatically renders the MILP constraint-matrix sparsity pattern and the reconstructed covariance sub-matrix heatmaps to publication-ready PDF/PNG at 600 dpi.
-* **Multi-Probe Support:** Compatible with Pantheon+, JLA, SGLS, and Galaxy Cluster datasets.
+## Install and run
 
----
-
-## 📦 What's New in v1.1
-
-* **🐛 Robust Pantheon+ covariance loader.** `load_pantheon_matrix` has been reverted to the original robust implementation that explicitly reads the first-line dimension integer (`n = 1701`). This eliminates the `2893402 element (+1)` size mismatch that could occur in v1.0 on freshly-unzipped Pantheon+ covariance files.
-* **📊 Automatic MILP sparsity-pattern plot.** When SGL triplet matching is run under MILP, the pipeline now emits `matrix_A_sparsity_milp_<tol>_<sn>.{pdf,png}` — a publication-grade rendering of the constraint matrix $A$ with the SGL/SNe-Ia constraint blocks annotated. This is the source figure used as Figure 1 in the companion paper.
-* **🎨 Automatic covariance-heatmap rendering.** After covariance extraction, every reconstructed sub-matrix is automatically rendered as a heatmap (`plot_cov_<mode>_<algo>_<tol>_<sn>_<suffix>_<key>.{pdf,png}`) with the colorbar labelled $C_{ij}$, suitable for direct inclusion in manuscripts.
-* **🗂️ Disambiguated output filenames.** Output `file_tag` now includes the SN-sample type (`pantheon` / `jla`) so that running the same ablation mode under different SN backends no longer overwrites previous results.
-* **💻 GUI version bump.** Window title now reads `CosmoMatcher V1.1 (Full Version with Ablation Engine)`.
-
-> 📌 The matching algorithm, the MILP formulation, and the covariance algebra are **unchanged** from v1.0. The reproducible matched dataset archived on Zenodo (DOI: `10.5281/zenodo.19695657`, generated with v1.0) is therefore bit-identical to a v1.1 re-run on the same inputs.
-
----
-
-## 📁 Repository Contents
-
-* `CosmoMatcher_v1.1.py` — Core Python source code with full English GUI (latest version).
-* `CosmoMatcher_v1.0.py` — Previous release, kept for archival reproducibility.
-* `161sgls.csv` — Target catalog of 161 strong gravitational lensing systems from Chen et al. (2019).
-* `Pantheon+SH0ES.dat` — Tracer catalog of Pantheon+ Type Ia supernovae.
-* `Pantheon+SH0ES_STAT+SYS.zip` — Full systematic covariance matrix for Pantheon+ (compressed).
-
-> **⚠️ NOTE:** You must unzip `Pantheon+SH0ES_STAT+SYS.zip` to extract the `.cov` file before loading it into the software.
-
----
-
-## 🚀 Installation and Compilation (Windows)
-
-To ensure stability and reproducibility on Windows, we recommend using a **Conda** environment with the specific versions used during development.
-
-### 1. Environment Setup
-
-Open your **Anaconda Prompt** and run the following commands:
+Python 3.12.12 on CPU/float64 was used for this packaged validation. Install the minimum dependencies from `requirements.txt`; `requirements-tested.txt` records the numerical versions used, not a promise that every other version has been tested. A desktop Python with Tk support is required for the GUI. No executable binary is included.
 
 ```bash
-conda create -n CosmoMatcher_Env python=3.10.19
-conda activate CosmoMatcher_Env
+python -m pip install -r requirements.txt
+python CosmoMatcher.py
+python CosmoMatcher.py run --config examples/demo_sgl.json
 ```
 
-### 2. Install Required Packages
+The CLI and scientific API can be used without opening the GUI. Synthetic examples cover paired anchors, single anchors and JLA covariance components.
 
-Install the strictly versioned dependencies required for calculation, GUI, plotting, and compilation:
+## Repository layout
+
+| Path | Purpose |
+| --- | --- |
+| `CosmoMatcher.py` | v1.4.3 GUI, CLI and backend |
+| `examples/`, `tests/` | Synthetic examples and 46 backend regression tests |
+| `data/` | Exact 161-lens and Pantheon+ input snapshots |
+| `reproduce.py`, `reproduce.json` | Rerun the paper's 112-system reference matching |
+| `verify_reference.py` | Independent optimization/index/covariance checks |
+| `reference_results/` | Frozen reference outputs; historical paths in manifests describe their origin |
+| `paper_figures/` | Eight adopted manuscript PDF figures |
+| `benchmarks/` | Observed GLS comparison and known-truth Monte Carlo study |
+| `applications/cddr143_application/` | Adopted cddv301 two-case CDDR example and saved chains |
+| `docs/` | Data attribution, manuscript correspondence, release and limitations notes |
+
+## Reproduce the paper
+
+From the repository root:
 
 ```bash
-pip install numpy==2.2.6 pandas==2.3.3 scipy==1.15.3 matplotlib==3.10.0 pyinstaller==6.17.0
+python -m unittest discover -s tests -v
+python verify_reference.py
+python reproduce.py
 ```
 
-> 📌 `matplotlib` is a **new** required dependency in v1.1 (used by the automatic diagnostic plots). If you are upgrading from a v1.0 environment, you only need to add `matplotlib==3.10.0`.
+The reference run uses 161 lenses and 1701 Pantheon+ light-curve records, yielding 112 systems and 224 distinct physical SN identifiers. `reproduce.py` writes `rerun_results/` and compares the output with the frozen reference.
 
-### 3. Compile to Standalone Executable (.exe)
-
-To generate a single `.exe` file for Windows distribution:
+For simulations:
 
 ```bash
-pyinstaller --onefile --windowed --name CosmoMatcher_v1.1 CosmoMatcher_v1.1.py
+cd benchmarks
+python -m unittest discover -s tests -v
+python cosmomatcher_benchmark.py --config benchmark_config.json --output baseline_rerun
+python cosmomatcher_benchmark.py --config stress_config.json --output stress_rerun
+python reproduce_observed_gls.py --output observed_rerun
+python make_paper_figures.py --results stress_rerun --output figures_rerun
 ```
 
-The compiled file `CosmoMatcher_v1.1.exe` will be located in the `dist` folder.
+There are 10,000 paired realizations per configuration and nine tolerance/truth-background configurations. At 5% tolerance linear GLS reduces distance-ratio RMSE with near-nominal coverage on the shared targets; constant GLS undercovers. At 3%, poorly supported linear extrapolation can have a heavy-tailed ratio distribution. These are distance-ratio simulations, not cosmological-parameter coverage tests. The benchmark's own version `1.0.0` identifies the experiment driver; its matching backend is v1.4.3.
 
----
+For the CDDR application (from the repository root):
 
-## 🖥️ User Guide for Windows
-
-1. **Prepare Data**: Unzip the `Pantheon+SH0ES_STAT+SYS.zip` file into your working folder.
-2. **Launch**: Double-click `CosmoMatcher_v1.1.exe` (or run `python CosmoMatcher_v1.1.py` in your terminal).
-3. **Configurations**:
-   - **Algorithm**: Select `MILP (Optimal)` for global optimization results.
-   - **Criterion**: Select `Δd/d (Comoving Distance)` for physical consistency.
-4. **Data Mapping**:
-   - Load `161sgls.csv` as the Target and `Pantheon+SH0ES.dat` as the Tracer.
-   - Map redshift columns (e.g., `zHD` for SN, `zl` and `zs` for SGL).
-5. **Run**: Click **"Start Matching and Extract Covariances"**. The results will be exported to your working directory:
-   - Matched catalog: `matched_<mode>_<algo>_<tol>.csv`
-   - Sub-covariance matrices: `cov_<mode>_<algo>_<tol>_<sn>_<suffix>_<key>.txt`
-   - **(v1.1)** MILP sparsity pattern: `matrix_A_sparsity_milp_<tol>_<sn>.{pdf,png}`
-   - **(v1.1)** Covariance heatmaps: `plot_cov_<mode>_<algo>_<tol>_<sn>_<suffix>_<key>.{pdf,png}`
-
----
-
-## 📜 Version History
-
-| Version | Date | Key Changes |
-|--------:|------|-------------|
-| **v1.1** | 2026-05 | Robust Pantheon+ loader; automatic MILP sparsity and covariance heatmap plots; disambiguated output filenames; `matplotlib` added as a required dependency. |
-| **v1.0** | 2026-05 | Initial public release. 2 × 2 ablation engine (MILP/Greedy × Δd/d/Δz), automated covariance extraction with full JLA 6-component handling, smart CSV reading, custom output-column selection. |
-
----
-
-## 📖 Citation
-
-If you use **CosmoMatcher** in your research, please cite the companion paper:
-
-```bibtex
-@article{Hu2026CosmoMatcher,
-  title  = {CosmoMatcher: A Global Optimization Pipeline for Multi-probe
-            Cosmological Data Matching and Covariance Extraction},
-  author = {Hu, Jian},
-  journal= {Publications of the Astronomical Society of the Pacific},
-  year   = {2026},
-  note   = {Submitted}
-}
+```bash
+python -m pip install -r applications/cddr143_application/requirements.txt
+python applications/cddr143_application/reproduce.py
+python applications/cddr143_application/reproduce_matching.py
 ```
 
-The reproducible research-ready dataset (130-system SGL input following the Chen et al. 2019 exclusions, yielding 107 matched SGL–SN Ia triplets; full $214 \times 214$ Pantheon+ sub-covariance for the 214 unique SN Ia tracers; and the corresponding JLA sub-matrices) is permanently archived on Zenodo:
+The first command after installation verifies frozen inputs and covariance indices; the second reruns matching and compares the 99-system result. To rerun inference, first copy the application directory to a working location, then run `python reproduce.py --sample` there: this replaces the copied `runs/` and `output/` products with new results. The archived reference chains are already supplied.
 
-> **DOI:** [10.5281/zenodo.19695657](https://doi.org/10.5281/zenodo.19695657)
+## Keep these samples distinct
 
----
+| Purpose | Inputs | Matched systems |
+| --- | --- | --- |
+| Main software reference | 161 lenses; 1701 Pantheon+ records | 112 |
+| Current CDDR revisit | 143 SS3 lenses from the final 204-lens compilation; 1048 original Pantheon SNe | 99 |
+| Zhou 2021 historical analysis | 205-lens arXiv-era compilation; 1048 original Pantheon SNe; greedy matching | 120 |
+| Separate historical companion sample | 130 selected lenses | 107; not the main reference in this release |
 
-## ✉️ Contact
+The current CDDR example revisits a published analysis to incorporate previously omitted SN systematic covariance and globally constrained allocation. Lens preselection also changed, so 120 versus 99 is not a fixed-input greedy/MILP performance comparison.
 
-**Jian Hu** — [dg1626002@smail.nju.edu.cn](mailto:dg1626002@smail.nju.edu.cn)
-*Institute of Astronomy and Information, Dali University*
+## Covariance and CDDR limitations
+
+Pantheon+ `STAT+SYS` is a total statistical-plus-systematic covariance; do not add its statistical diagonal again. Original Pantheon C11 is systematic-only. The CDDR example adds the mB statistical variance once and retains LL, SS, LS and transpose systematic blocks.
+
+The manuscript adopts cddv301, with identical 99 systems, host-mass errors (including error=99), priors and 140 walkers/1000 steps in both cases. It compares only inclusion/omission of C11 systematic covariance. Within-SN SALT2 statistical cross-covariances are omitted; the original parameter-dependent chi-square weighting has no covariance-determinant factor. Both chains fail the original 50-autocorrelation-time length criterion. This is a reproducible workflow example, not a convergence-validated precision CDDR measurement. cddv302 and other exploratory models are not included.
+
+## Accepted companion use
+
+The manuscript also cites the RAA-accepted lens--quasar--cluster application, arXiv:2610.26097. See `docs/ACCEPTED_APPLICATION.md` for its relation to the allocation design and the scope of validation.
+
+## Cite, data and rights
+
+Use `CITATION.cff` for the software and cite the original data papers listed in `docs/DATA_SOURCES.md`. No paper DOI or new Zenodo DOI is invented here. Existing v1.0/v1.1 archives describe their own samples and cannot automatically be cited as immutable copies of this release.
+
+No software license grant has been invented during packaging. See `docs/LICENSING_STATUS.md`; the copyright holder should choose a software license before describing this as a licensed open-source release. Third-party data and the journal class retain their respective rights.

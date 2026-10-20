@@ -1,0 +1,49 @@
+{
+  "file_paths": {
+    "tracer": "inputs/Ancillary_C11_jla.csv",
+    "obj": "inputs/sgls_143_fiduciary_ss3.csv",
+    "covariance": "inputs/sys_full_long_C11.txt"
+  },
+  "col_cfg": {
+    "tracer_z_col": "zcmb",
+    "z1_col": "zl",
+    "z2_col": "zs",
+    "tracer_id_col": "name",
+    "magnitude_col": "mb",
+    "output_cols": [
+      "name",
+      "zcmb",
+      "zhel",
+      "dz",
+      "mb",
+      "dmb",
+      "x1",
+      "dx1",
+      "color",
+      "dcolor",
+      "3rdvar",
+      "d3rdvar",
+      "cov_m_s",
+      "cov_m_c",
+      "cov_s_c"
+    ]
+  },
+  "params": {
+    "wm": 0.31,
+    "tol": 0.05,
+    "unique_by": "object",
+    "formulation": "compact",
+    "plots": false,
+    "require_covariance": true,
+    "symmetry_rtol": 1e-05,
+    "check_psd": false,
+    "output_dir": "matching_rerun",
+    "covariance_kind": "systematic",
+    "tie_break": "catalogue_order",
+    "tie_cost_tolerance": 1e-12
+  },
+  "mode": "sgls",
+  "sn_type": "pantheon",
+  "algo": "milp",
+  "tol_type": "dd"
+}

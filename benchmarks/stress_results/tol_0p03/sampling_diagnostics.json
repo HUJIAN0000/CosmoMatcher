@@ -1,0 +1,8 @@
+{
+  "minimum_eigenvalue_before_roundoff_clipping": 1.7281096098201119e-09,
+  "negative_roundoff_eigenvalues_clipped": 0,
+  "negative_eigenvalue_tolerance": 6.506839424577114e-12,
+  "numerical_rank": 352,
+  "retained_factor_columns": 352,
+  "cross_method_noise": "one joint draw with covariance D C_parent D^T; exact marginal of the same parent SN noise"
+}

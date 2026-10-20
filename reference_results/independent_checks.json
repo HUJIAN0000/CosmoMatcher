@@ -1,0 +1,12 @@
+{
+  "complete_systems": 112,
+  "triplets": 169998,
+  "variables": 11704,
+  "active_constraint_rows": 1326,
+  "nonzeros": 23408,
+  "minimum_cost": 0.01662708047198727,
+  "reference_cost": 0.01662708047198727,
+  "ratio_covariance_max_residual": 3.469446951953614e-18,
+  "backend_imported": false,
+  "status": "passed"
+}

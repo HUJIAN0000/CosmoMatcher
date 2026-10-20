@@ -1,0 +1,19 @@
+{
+  "anchors": 224,
+  "input_rows_used": 1006,
+  "candidate_count_range": [
+    1,
+    92
+  ],
+  "compressed_covariance_rank": 182,
+  "R_covariance_rank": 112,
+  "median_abs_R_difference": 0.019073033088806035,
+  "max_abs_R_difference": 0.14487083952009228,
+  "median_sigma_ratio_GLS_to_selection": 0.17600470465735307,
+  "R_range": [
+    0.2242084015581327,
+    0.8991689925718671
+  ],
+  "cross_anchor_covariance_preserved": true,
+  "interpretation": "constant local GLS in apparent magnitude; descriptive comparison, not accuracy/bias validation"
+}

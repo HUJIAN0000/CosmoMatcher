@@ -1,0 +1,28 @@
+{
+  "sn_file": "data/Pantheon+SH0ES.dat",
+  "covariance_file": "data/Pantheon+SH0ES_STAT+SYS.cov",
+  "lens_file": "data/161sgls.csv",
+  "output_dir": "results",
+  "n_sim": 10000,
+  "batch_size": 512,
+  "seed": 20261014,
+  "blas_threads": 1,
+  "matching_omega_m": 0.3,
+  "tolerances": [0.05],
+  "truth_models": [
+    {"name": "flat_LCDM_0p30", "omega_m": 0.3, "w": -1.0}
+  ],
+  "h0": 70.0,
+  "absolute_magnitude": -19.3,
+  "methods": ["single", "gls_constant", "gls_linear"],
+  "selection_file": null,
+  "plots": true,
+  "save_replicates": false,
+  "columns": {
+    "sn_z": "zHD",
+    "sn_id": "CID",
+    "lens_z": "zl",
+    "source_z": "zs",
+    "lens_name": "Lens name"
+  }
+}
